@@ -1,0 +1,227 @@
+﻿<Window x:Class="KassaSystee.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KassaSystee"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="830" Width="800"
+        Background="WhiteSmoke"
+        ResizeMode="CanResizeWithGrip"  
+    WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Grid x:Name="outer" Background="WhiteSmoke" Loaded="load_excact">
+        <Grid Grid.Column="1" Margin="0,0,0,0">
+            <TextBlock Grid.Row="0" Text="Afrekenen" FontSize="40" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <Button Grid.Row="1" Margin="0,10,0,0" Content="PLANTEN" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Button_Click"></Button>
+            <Button Grid.Row="2" Margin="0,10,0,0" Content="MESTGROND" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Button_Click"></Button>
+            <Button Grid.Row="3" Margin="0,10,0,0" Content="GEREEDSCHAP" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Button_Click"></Button>
+            <Button x:Name="alles" Grid.Row="4" Margin="0,10,0,0" Content="ALLES" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Button_Click"></Button>
+            <Grid Grid.Row="5">
+                <TextBlock Grid.Row="0" Margin="0,10,0,0" Text="HANDMATIG INVOEREN BARCODE:" FontSize="20" FontFamily="calibri" FontWeight="Normal" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
+                <TextBox x:Name="tbBarcode" Grid.Row="1" Margin="0,10,0,0" FontSize="15" FontFamily="calibri" FontWeight="Normal" Text="" PreviewMouseDown="TbBarcode_PreviewMouseDown"/>
+                <Button Grid.Row="4" Margin="0,10,0,0" Content="VOEG TOE" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Button>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="0.6*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+            </Grid>
+            <Button Grid.Row="6" Margin="0,10,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <TextBlock TextWrapping="Wrap" FontSize="25" FontFamily="calibri" FontWeight="Normal" Text="RETOUNEREN (andere pagina)" TextAlignment="Center"></TextBlock>
+            </Button>
+            <TextBlock Grid.Row="7" Margin="0,10,0,0" Text="DANIËLLE GEELEN" FontSize="20" FontFamily="calibri" FontWeight="Normal" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*" MinHeight="40"/>
+                <RowDefinition Height="*" MinHeight="55"/>
+                <RowDefinition Height="*" MinHeight="55"/>
+                <RowDefinition Height="*" MinHeight="55"/>
+                <RowDefinition Height="*" MinHeight="55"/>
+                <RowDefinition Height="1.5*" MinHeight="135" />
+                <RowDefinition Height="*" MinHeight="75"/>
+                <RowDefinition Height="0.5*" MinHeight="30"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Grid Grid.Column="4" Margin="0,0,0,0">
+            <Grid Grid.Row="0">
+                <TextBlock Grid.Column="0" Text="Zoek product:" FontSize="20" FontFamily="calibri" FontWeight="Normal" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
+                <TextBox x:Name="tbZoek" Grid.Column="1" FontSize="15" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Center" Text="" PreviewMouseDown="tbZoek_PreviewMouseDown" TouchDown="tbZoek_TouchDown" ></TextBox>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MinWidth="120"/>
+                    <ColumnDefinition Width="1.5*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Grid Grid.Row="1">
+                <ListBox x:Name="list" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,3,0" MouseUp="clickListItem"></ListBox>
+            </Grid>
+            <Grid x:Name="keyboardKeys" Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" MinHeight="35"/>
+                    <RowDefinition Height="*" MinHeight="35"/>
+                    <RowDefinition Height="*" MinHeight="35"/>
+                    <RowDefinition Height="*" MinHeight="35"/>
+                    <RowDefinition Height="5" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Button x:Name="q" Grid.Column="0" Margin="0,3,3,0" Content="q" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="w" Grid.Column="1" Margin="0,3,3,0" Content="w" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="e" Grid.Column="2" Margin="0,3,3,0" Content="e" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="r" Grid.Column="3" Margin="0,3,3,0" Content="r" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="t" Grid.Column="4" Margin="0,3,3,0" Content="t" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="y" Grid.Column="5" Margin="0,3,3,0" Content="y" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="u" Grid.Column="6" Margin="0,3,3,0" Content="u" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="i" Grid.Column="7" Margin="0,3,3,0" Content="i" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="o" Grid.Column="8" Margin="0,3,3,0" Content="o" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="p" Grid.Column="9" Margin="0,3,3,0" Content="p" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Button x:Name="a" Grid.Column="1" Margin="0,3,3,0" Content="a" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="s" Grid.Column="2" Margin="0,3,3,0" Content="s" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="d" Grid.Column="3" Margin="0,3,3,0" Content="d" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="f" Grid.Column="4" Margin="0,3,3,0" Content="f" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="g" Grid.Column="5" Margin="0,3,3,0" Content="g" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="h" Grid.Column="6" Margin="0,3,3,0" Content="h" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="j" Grid.Column="7" Margin="0,3,3,0" Content="j" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="k" Grid.Column="8" Margin="0,3,3,0" Content="k" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="l" Grid.Column="9" Margin="0,3,3,0" Content="l" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Button x:Name="shft" Grid.Column="0" Margin="0,3,3,0" Content="SHFT" FontSize="10" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="shiftKey"></Button>
+                    <Button x:Name="z" Grid.Column="1" Margin="0,3,3,0" Content="z" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="x" Grid.Column="2" Margin="0,3,3,0" Content="x" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="c" Grid.Column="3" Margin="0,3,3,0" Content="c" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="v" Grid.Column="4" Margin="0,3,3,0" Content="v" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="b" Grid.Column="5" Margin="0,3,3,0" Content="b" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="n" Grid.Column="6" Margin="0,3,3,0" Content="n" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="m" Grid.Column="7" Margin="0,3,3,0" Content="m" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="komma" Grid.Column="8" Margin="0,3,3,0" Content="," FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Button x:Name="punt" Grid.Column="9" Margin="0,3,3,0" Content="." FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Button x:Name="space" Grid.Column="1"  Margin="0,3,0,0" Content="Space"></Button>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" MinHeight="40"/>
+                <RowDefinition Height="10*" MinHeight="320"/>
+                <RowDefinition Height="3.5*" MinHeight="140"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Grid Grid.Column="6">
+            <Button Grid.Row="1" Margin="0,0,0,10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+                <TextBlock TextWrapping="Wrap" FontSize="25" FontFamily="calibri" FontWeight="Normal" Text="AFRONDEN (+printen bon)" TextAlignment="Center"></TextBlock>
+            </Button>
+            <Grid Grid.Row="2">
+                <TextBlock Grid.Row="0" Padding="10" Text="Totaal:" FontSize="20" FontFamily="calibri" FontWeight="Normal" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="1" Padding="10" Text="Aantal producten:" FontSize="15" FontFamily="calibri" FontWeight="Normal" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="2" Padding="10" Text="Totaal (excl. BTW):" FontSize="15" FontFamily="calibri" FontWeight="Normal" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="3" Padding="10" Text="Totaal (inc. BTW):" FontSize="15" FontFamily="calibri" FontWeight="Normal" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" TextAlignment="Center"></TextBlock>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <DataGrid x:Name="data" Grid.Row="3" >
+                <DataGrid.Columns>
+
+
+                    <DataGridTextColumn x:Name="c1" Header="ID" Binding="{Binding XPath=@Name}" ></DataGridTextColumn>
+                    <DataGridTextColumn x:Name="c2" Header="Description" Binding="{Binding XPath=@Type}"></DataGridTextColumn>
+                    <DataGridTextColumn x:Name="c3" Header="Prijs"></DataGridTextColumn>
+                    <DataGridTextColumn x:Name="c4" Header="Aantal"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Grid.Row="4">
+                <Button x:Name="zeven" Grid.Column="0" Grid.Row="0" Margin="0,3,3,0" Content="7" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                <Button x:Name="acht" Grid.Column="1" Grid.Row="0" Margin="0,3,3,0" Content="8" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                <Button x:Name="negen" Grid.Column="2" Grid.Row="0" Margin="0,3,3,0" Content="9" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                <Button x:Name="vier" Grid.Column="0" Grid.Row="1" Margin="0,3,3,0" Content="4" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                <Button x:Name="vijf" Grid.Column="1" Grid.Row="1" Margin="0,3,3,0" Content="5" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                <Button x:Name="zes" Grid.Column="2" Grid.Row="1" Margin="0,3,3,0" Content="6" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                <Button x:Name="een" Grid.Column="0" Grid.Row="2" Margin="0,3,3,0" Content="1" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                <Button x:Name="twee" Grid.Column="1" Grid.Row="2" Margin="0,3,3,0" Content="2" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                <Button x:Name="drie" Grid.Column="2" Grid.Row="2" Margin="0,3,3,0" Content="3" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                <Button x:Name="backspace" Grid.Column="0" Grid.Row="3"  Margin="0,3,3,0" Content="BACK" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="backKey"></Button>
+                <Button x:Name="nul" Grid.Column="1" Grid.Row="3"  Margin="0,3,3,0" Content="0" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="keyboard"></Button>
+                <Button x:Name="enter" Grid.Column="2" Grid.Row="3" Margin="0,3,3,0" Content="ENTER" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="enterKey"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*" MinHeight="40"/>
+                <RowDefinition Height="*" MinHeight="70"/>
+                <RowDefinition Height="*" MinHeight="50"/>
+                <RowDefinition Height="6*" MinHeight="210"/>
+                <RowDefinition Height="2*" MinHeight="125"/>
+                <RowDefinition Height="5" />
+            </Grid.RowDefinitions>
+        </Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="37*" MinWidth="5"/>
+            <ColumnDefinition Width="300*" MinWidth="250" MaxWidth="295"/>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="8"/>
+            <ColumnDefinition Width="300*" MinWidth="260" MaxWidth="300"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="300*" MinWidth="250" MaxWidth="295"/>
+            <ColumnDefinition Width="37*" MinWidth="5"/>
+        </Grid.ColumnDefinitions>
+    </Grid>
+</Window>
