@@ -11,11 +11,13 @@ namespace KassaSystee
         public string Code = "";
         public string Description = "";
         public double Price = 0.0;
-        public Items(string sCode, string sDescription, double dPrice)
+        public string Categorie = "";
+        public Items(string sCode, string sDescription, double dPrice, string sCategorie)
         {
             Price = dPrice;
             Code = sCode;
             Description = sDescription;
+            Categorie = sCategorie;
         }
         public Items() { }
     }

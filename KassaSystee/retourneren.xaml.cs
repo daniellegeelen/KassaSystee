@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,28 +11,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MySql.Data.MySqlClient;
-using System.Data;
-using System.Diagnostics;
-using System.Collections;
 
 namespace KassaSystee
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for retourneren.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class retourneren : Window
     {
-        public Inlog inlog;
         List<Items> zoekResult = new List<Items>();//list met alle producten in alle categorieën
         List<Items> zoekPlanten = new List<Items>();//list met alle producten in de categorie Planten
         List<Items> zoekMestgrond = new List<Items>();//list met alle producten in de categorie Mestgrond
         List<Items> zoekGereedschap = new List<Items>();//list met alle producten in de categorie gereedschap
         List<Items> zoekOpId = new List<Items>();
         List<Items> selectedItems = new List<Items>();
-        
+
         DataTable dt = new DataTable("MyTable");
         int aantalProducten = 0;
         int aantalOptellen = 0;
@@ -41,27 +36,16 @@ namespace KassaSystee
         static string test = "";
         public static dialog Dialog = new dialog();
         public static loadScreen Loadscreen;
-        private retourneren retour;
-        public static MainWindow mainw;
-        private bon bon;
-
+        public static retourneren retour;
+        private MainWindow mw;
 
 
         TextBox focus;
         Button lastClicked;
-       
-
-        public MainWindow()
+        public retourneren(MainWindow mw)
         {
-            retour = new retourneren(this);
-            if (loadScreen.goToLogin == true)
-            {
-                inlog = new Inlog(this);
-                inlog.Show();
-                this.Hide();
-            }
-            
-             InitializeComponent();
+            this.mw = mw;
+            InitializeComponent();
             focus = tbZoek;
             lastClicked = alles;
             dt.Columns.Add("ID", typeof(string));
@@ -70,7 +54,6 @@ namespace KassaSystee
             dt.Columns.Add("Aantal", typeof(string));
             // alles.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
         }
-        
         private async void keyboard(object sender, RoutedEventArgs e)//te snel tpen gaat fout
         {
             try
@@ -84,8 +67,8 @@ namespace KassaSystee
             {
 
             }
-               
-            
+
+
             //if(focus == tbZoek)
             //{
             //    //filter();
@@ -95,22 +78,22 @@ namespace KassaSystee
 
             //}
         }
-      
-       
+
+
         private void TbBarcode_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             focus = tbBarcode;
         }
         private void tbZoek_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            
+
             focus = tbZoek;
         }
         private void Button_Click(object sender, RoutedEventArgs e)//categorie buttons
         {
             try
             {
-                if(sender == null)
+                if (sender == null)
                 {
                     sender = alles;
                 }
@@ -126,8 +109,8 @@ namespace KassaSystee
             {
 
             }
-            
-               
+
+
         }
         private void enterKey(object sender, RoutedEventArgs e)
         {
@@ -163,17 +146,17 @@ namespace KassaSystee
 
             }
             // mySql();
-            
-            
+
+
 
         }
         private void shiftKey(object sender, RoutedEventArgs e)
-        { 
-            foreach(Grid grid in keyboardKeys.Children)
+        {
+            foreach (Grid grid in keyboardKeys.Children)
             {
-                foreach(Button button in grid.Children)
+                foreach (Button button in grid.Children)
                 {
-                    if(button.Content.ToString().ToUpper() == button.Content.ToString())
+                    if (button.Content.ToString().ToUpper() == button.Content.ToString())
                     {
                         button.Content = button.Content.ToString().ToLower();
                         space.Content = space.Content.ToString().ToLower();
@@ -184,16 +167,16 @@ namespace KassaSystee
                         space.Content = space.Content.ToString().ToLower();
 
                     }
-                }   
+                }
             }
             focus.Focus();
         }
         private void backKey(object sender, RoutedEventArgs e)
         {
             TextBox typen = focus;
-            if(typen.Text != "")
+            if (typen.Text != "")
             {
-                string back = typen.Text .Substring(0,typen.Text.Length -1);
+                string back = typen.Text.Substring(0, typen.Text.Length - 1);
                 typen.Text = back;
             }
             focus.Focus();
@@ -216,7 +199,7 @@ namespace KassaSystee
         {
             list.Items.Clear();//list =  listbox.name
             ZoekSalesItemPrices();
-            if(categorie == "alles")
+            if (categorie == "alles")
             {
                 foreach (Items item in zoekResult)
                 {
@@ -252,13 +235,13 @@ namespace KassaSystee
                     list.Items.Add(test);
                 }
             }
-            if(categorie == "barcode")
+            if (categorie == "barcode")
             {
                 foreach (Items item in zoekOpId)
                 {
-                        string afgerondePrijs = "€ " + item.Price.ToString("0.00");
-                        string test = item.Code + "\n" + item.Description + "\n" + afgerondePrijs + "\n" + item.Categorie;
-                        list.Items.Add(test);
+                    string afgerondePrijs = "€ " + item.Price.ToString("0.00");
+                    string test = item.Code + "\n" + item.Description + "\n" + afgerondePrijs + "\n" + item.Categorie;
+                    list.Items.Add(test);
                 }
             }
         }
@@ -270,11 +253,10 @@ namespace KassaSystee
 
         private void tbZoek_TouchDown(object sender, TouchEventArgs e)//werkt evt toevoegen zodat hij bij een touch schem ook werkt
         {
-           // tbBarcode.Text = "TouchedTbZoek";
+            // tbBarcode.Text = "TouchedTbZoek";
         }
         private void fillDatagrid(string[] selectedItems)
         {
-            aantalProducten = int.Parse(tbAantalProducten.Text);
             aantalProducten += 1;
             tbAantalProducten.Text = aantalProducten.ToString();
             ID.Binding = new Binding("ID");
@@ -318,14 +300,14 @@ namespace KassaSystee
         }
         private void berekenTotaal(int count, int tel)
         {
-           tbTotaalExclBTW.Text = "€ " + (double.Parse(tbTotaalExclBTW.Text.Substring(2)) + (double.Parse(dt.Rows[count][2].ToString().Substring(2))) * int.Parse(dt.Rows[count][3].ToString())).ToString("0.00");
+            tbTotaalExclBTW.Text = "€ " + (double.Parse(tbTotaalExclBTW.Text.Substring(2)) + (double.Parse(dt.Rows[count][2].ToString().Substring(2))) * int.Parse(dt.Rows[count][3].ToString())).ToString("0.00");
             tbTotaalInclBTW.Text = "€ " + (double.Parse(tbTotaalExclBTW.Text.Substring(2)) + double.Parse(tbTotaalExclBTW.Text.Substring(2)) * 0.21).ToString("0.00");
         }
         private void clickListItem(object sender, MouseButtonEventArgs e)
         {
             try
             {
-                if(list.Items.Count != 0)
+                if (list.Items.Count != 0)
                 {
                     string[] selectedItems = list.SelectedItem.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     fillDatagrid(selectedItems);
@@ -335,30 +317,25 @@ namespace KassaSystee
             {
 
             }
-                
-            
+
+
         }
-       
+
         public void changeAantal(object sender, DataGridCellEditEndingEventArgs e)
         {
-            
-
             tb = e.EditingElement as TextBox;  // Assumes columns are all TextBoxes
             dgc = e.Column;
-            
-            
-            //  Dialog.Show();
-            enter.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             tb.Text = test;
+
             object item = data.SelectedItem;
             string ID = (data.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text;
             string beschrijving = (data.SelectedCells[1].Column.GetCellContent(item) as TextBlock).Text;
             string prijs = (data.SelectedCells[2].Column.GetCellContent(item) as TextBlock).Text;
-            string aantal =  tb.Text;
+            string aantal = tb.Text;
             int tel = dt.Rows.Count;
             aantalOptellen = 0;
             tbTotaalExclBTW.Text = "€ 0.00";
-            for (int count = 0; count<tel; count++)
+            for (int count = 0; count < tel; count++)
             {
                 if (ID == dt.Rows[count][0].ToString())
                 {
@@ -366,28 +343,27 @@ namespace KassaSystee
                 }
                 try
                 {
-                    aantalOptellen = aantalOptellen +int.Parse(dt.Rows[count][3].ToString());
+                    aantalOptellen = aantalOptellen + int.Parse(dt.Rows[count][3].ToString());
                     tbAantalProducten.Text = aantalOptellen.ToString();
-                    data.ItemsSource = dt.DefaultView;
                     berekenTotaal(count, tel);
-                    //data.ItemsSource = dt.DefaultView;
+                    data.ItemsSource = dt.DefaultView;
                 }
                 catch
                 {
-                    MessageBox.Show("lj");
+
                 }
-                
+
             }
         }
         public static void getValue()
         {
-            test = dialog.value;
+            test = Dialog.tbValue.Text;
         }
-            
+
 
         private void data_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            dialog Dialog = new dialog();
+            // dialog Dialog = new dialog();
             Dialog.tbValue.Text = "";
             Dialog.Title = "Aantal veranderen";
             Dialog.ShowDialog();
@@ -411,7 +387,7 @@ namespace KassaSystee
                 loadExcactGegevensMetFilter("barcode");
                 if (list.Items.Count != 1)
                 {
-                    MessageBox.Show("Scan een geldige barcode"); 
+                    MessageBox.Show("Scan een geldige barcode");
                 }
                 else
                 {
@@ -429,89 +405,32 @@ namespace KassaSystee
 
         private void btnVoegToe_Click(object sender, RoutedEventArgs e)
         {
-            if(focus == tbBarcode)
+            if (focus == tbBarcode)
             {
                 enter.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             }
-           
+
         }
 
-        private void Retourneren(object sender, RoutedEventArgs e)
+        private void btnBonRetourneren(object sender, RoutedEventArgs e)
         {
             
-            if(tbAfrekenen.Tag.ToString() == "afrekenen")
-            {
-                tbAfrekenen.Text = "Retourneren";//Text links boven
-                tbRetournerenButton.Text = "Afrekenen";//Button retourneren/afrekenen
-                tbAfrondenButton.Text = "Afronden retourbon Printen";//button afronden
-                tbAfrekenen.Tag = "retourneren";
-            }
-            else if(tbAfrekenen.Tag.ToString() == "retourneren")
-            {
-                tbAfrekenen.Text = "Afrekenen";
-                tbRetournerenButton.Text = "Retourneren";//Button retourneren/afrekenen
-                tbAfrondenButton.Text = "Afronden bon Printen";//button afronden
-                tbAfrekenen.Tag = "afrekenen";
-            }
-           
-            
-            
-            
+        }
+
+        private void Afrekenen(object sender, RoutedEventArgs e)
+        {
             //this.Hide();
-            //retour.Show();
-        }
-
-        private void btnBonAfrekenen(object sender, RoutedEventArgs e)
-        {
-            if(dt.Rows.Count != 0)
-            {
-                bon = new bon(dt, tbAantalProducten.Text, tbTotaalInclBTW.Text, tbTotaalExclBTW.Text, tbAfrekenen.Tag.ToString());
-                //this.Hide();
-                bon.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Er zijn geen producten toegevoegd!");
-            }
-            
+            //mw.Show();
         }
 
         private void deleteItem(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                int  index = data.SelectedIndex;
-                int aantal = int.Parse(tbAantalProducten.Text) - int.Parse(dt.Rows[index][3].ToString());
-                dt.Rows[index].Delete();
-                if(data.Items.Count != 0)
-                {
-                    data.ItemsSource = dt.DefaultView;
-                    berekenTotaal(0, dt.Rows.Count);
-                    tbAantalProducten.Text = aantal.ToString();
-                }
-                else
-                {
-                    tbAantalProducten.Text = "0";
-                    tbTotaalExclBTW.Text = "€ 0.00";
-                    tbTotaalInclBTW.Text = "€ 0.00";
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Selecteer een item!");
-               
-            }
-        }
-
-        private void space_Click(object sender, RoutedEventArgs e)
-        {
-            TextBox typen = focus;
-            if (typen.Text != "")
-            {
-                string back = " ";
-                typen.Text = typen.Text + back;
-            }
-            focus.Focus();
+            int index = data.SelectedIndex;
+            int aantal = int.Parse(tbAantalProducten.Text) - int.Parse(dt.Rows[index][3].ToString());
+            dt.Rows[index].Delete();
+            data.ItemsSource = dt.DefaultView;
+            berekenTotaal(0, dt.Rows.Count);
+            tbAantalProducten.Text = aantal.ToString();
         }
     }
 }

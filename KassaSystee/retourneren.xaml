@@ -1,4 +1,4 @@
-﻿<Window x:Class="KassaSystee.MainWindow"
+﻿<Window x:Class="KassaSystee.retourneren"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -13,7 +13,7 @@
     <Grid x:Name="outer" Background="WhiteSmoke" Loaded="load_excact">
         <!--INNER LEFTUPPER-->
         <Grid Grid.Column="1" Margin="0,0,0,0">
-            <TextBlock x:Name="tbAfrekenen" Grid.Row="0" Text="Afrekenen" FontSize="35" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Center" HorizontalAlignment="Center" Tag="afrekenen"></TextBlock>
+            <TextBlock Grid.Row="0" Text="Retourneren" FontSize="25" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <Button Grid.Row="1" Margin="0,10,0,0" Content="PLANTEN" FontSize="20" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Button_Click"></Button>
             <Button Grid.Row="2" Margin="0,10,0,0" Content="MESTGROND" FontSize="20" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Button_Click"></Button>
             <Button Grid.Row="3" Margin="0,10,0,0" Content="GEREEDSCHAP" FontSize="20" FontFamily="calibri" FontWeight="Normal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Button_Click"></Button>
@@ -31,8 +31,8 @@
                 </Grid.RowDefinitions>
             </Grid>
             <!--EINDE BARCODE TOEVOEGEN-->
-            <Button x:Name="btnRetourneren" Grid.Row="6" Margin="0,10,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Retourneren">
-                <TextBlock x:Name="tbRetournerenButton" TextWrapping="Wrap" FontSize="20" FontFamily="calibri" FontWeight="Normal" Text="RETOURNEREN" TextAlignment="Center"></TextBlock>
+            <Button x:Name="btnRetourneren" Grid.Row="6" Margin="0,10,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Afrekenen">
+                <TextBlock TextWrapping="Wrap" FontSize="20" FontFamily="calibri" FontWeight="Normal" Text="AFREKENEN (andere pagina)" TextAlignment="Center"></TextBlock>
             </Button>
             <TextBlock Grid.Row="7" Margin="0,10,0,0" Text="" FontSize="20" FontFamily="calibri" FontWeight="Normal" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
             <!--ROWDEF INNER LEFTUPPER-->
@@ -76,8 +76,8 @@
         <!--EINDE INNER MIDDELUPPER-->
         <!--INNER RIGHTUPPER-->
         <Grid Grid.Column="6">
-            <Button Grid.Row="0" Margin="0,5,0,10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="btnBonAfrekenen">
-                <TextBlock x:Name="tbAfrondenButton" TextWrapping="Wrap" FontSize="25" FontFamily="calibri" FontWeight="Normal" Text="AFRONDEN" TextAlignment="Center"></TextBlock>
+            <Button Grid.Row="0" Margin="0,5,0,10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="btnBonRetourneren">
+                <TextBlock TextWrapping="Wrap" FontSize="25" FontFamily="calibri" FontWeight="Normal" Text="AFRONDEN (+printen retour bon)" TextAlignment="Center"></TextBlock>
             </Button>
             <!--TOTALEN-->
             <Grid Grid.Row="1">
@@ -114,7 +114,7 @@
             <TextBox x:Name="tbHidden" Visibility="Hidden">
             </TextBox>
 
-            <Button x:Name="btnDelete" Content="Delete Item" FontSize="20" HorizontalAlignment="Stretch" Margin="0,5,0,0" Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" Click="deleteItem"/>
+            <Button x:Name="btnDelete" Content="Delete Item" FontSize="20" HorizontalAlignment="Stretch" Margin="5,5,0,0" Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" Click="deleteItem"/>
 
             <!--ROWDEF INNER RIGHTUPPER-->
             <Grid.RowDefinitions>
@@ -222,7 +222,7 @@
                 <!--EINDE KEYS UNDER-->
                 <!--SPACEBAR-->
                 <Grid Grid.Row="3">
-                    <Button x:Name="space" Grid.Column="1"  Margin="0,3,0,0" Content="Space" FontSize="25" Click="space_Click"></Button>
+                    <Button x:Name="space" Grid.Column="1"  Margin="0,3,0,0" Content="Space" FontSize="25"></Button>
                     <!--COLUMNDEF SPACEBAR-->
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>

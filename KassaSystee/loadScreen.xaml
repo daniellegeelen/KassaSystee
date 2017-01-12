@@ -1,0 +1,22 @@
+﻿<Window x:Class="KassaSystee.loadScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KassaSystee"
+        mc:Ignorable="d"
+        Title="Gegevens ophalen" Height="140" Width="500" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" ShowInTaskbar="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="120"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="tbloading" Grid.Row="0" Text="Gegevens worden opgehaald..." FontSize="20" Margin="10,0,10,0" VerticalAlignment="Bottom" />
+        <ProgressBar x:Name="pbLoading" Grid.Row="1" Value="0" Margin="10,0,10,0" HorizontalAlignment="Stretch" Height="20" VerticalAlignment="Center" Minimum="0" Maximum="100"/>
+        <TextBlock x:Name="tbPercentage" Grid.Row="1" Grid.Column="1" Text="0 %" FontSize="30" Margin="10,0,10,0" VerticalAlignment="Center"/>
+    </Grid>
+</Window>

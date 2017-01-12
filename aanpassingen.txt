@@ -1,0 +1,4 @@
+scroll balken bij erp login moeten weg
+kleurtjes op knoppen voor duidelijkheid
+toetsenbord popup (of zoiets hoe het makkelijk is)
+graag nog logo links boven in beeld (knoppen iets naar beneden doen)
